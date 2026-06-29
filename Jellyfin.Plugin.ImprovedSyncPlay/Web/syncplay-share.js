@@ -33,8 +33,18 @@
         return Promise.resolve(getGroupIdFromManager() || null);
     }
 
+    function getWebBasePath() {
+        var path = window.location.pathname;
+        var webIndex = path.indexOf('/web');
+        if (webIndex >= 0) {
+            return path.substring(0, webIndex + 4) + '/';
+        }
+
+        return '/web/';
+    }
+
     function buildShareUrl(groupId) {
-        return window.location.origin + '/web/?syncplayGroup=' + encodeURIComponent(groupId);
+        return window.location.origin + getWebBasePath() + '?syncplayGroup=' + encodeURIComponent(groupId);
     }
 
     function copyShareUrl(url) {
