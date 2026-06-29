@@ -17,10 +17,10 @@ export JELLYFIN_IMAGE_TAG="$(
 )"
 
 PLUGIN_NAME="$(
-  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.Template/meta.json'))['name'])"
+  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['name'])"
 )"
 PLUGIN_VERSION="$(
-  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.Template/meta.json'))['version'])"
+  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['version'])"
 )"
 export PLUGIN_NAME
 export PLUGIN_STAGE="$ROOT/artifacts/plugin/$PLUGIN_NAME"

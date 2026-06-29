@@ -1,10 +1,10 @@
-using Jellyfin.Plugin.Template.Infrastructure;
+using Jellyfin.Plugin.ImprovedSyncPlay.Infrastructure;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Model.Plugins;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace Jellyfin.Plugin.Template.Tests;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Tests;
 
 public class OptionalPluginGuardTests
 {

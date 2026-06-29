@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.Template.Infrastructure;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Infrastructure;
 
 /// <summary>
 /// Tiered logger with a consistent plugin name prefix.

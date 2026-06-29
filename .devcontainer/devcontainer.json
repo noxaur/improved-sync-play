@@ -1,5 +1,5 @@
 {
-  "name": "Jellyfin Plugin Template",
+  "name": "Jellyfin Plugin Improved SyncPlay",
   "image": "mcr.microsoft.com/devcontainers/dotnet:9.0",
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}

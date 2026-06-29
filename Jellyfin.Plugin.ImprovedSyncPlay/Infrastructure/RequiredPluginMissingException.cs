@@ -1,6 +1,6 @@
 using System;
 
-namespace Jellyfin.Plugin.Template.Infrastructure;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Infrastructure;
 
 /// <summary>
 /// Thrown when a hard-required co-installed plugin is missing.

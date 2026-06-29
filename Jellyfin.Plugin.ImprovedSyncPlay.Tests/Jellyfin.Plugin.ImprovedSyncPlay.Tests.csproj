@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jellyfin.Plugin.Template\Jellyfin.Plugin.Template.csproj" />
+    <ProjectReference Include="..\Jellyfin.Plugin.ImprovedSyncPlay\Jellyfin.Plugin.ImprovedSyncPlay.csproj" />
   </ItemGroup>
 
 </Project>

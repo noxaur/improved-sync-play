@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.Template.Tests;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Tests;
 
 internal sealed class ListLogger : ILogger
 {

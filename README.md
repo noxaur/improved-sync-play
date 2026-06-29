@@ -1,6 +1,6 @@
-# Jellyfin.Plugin.Template
+# Jellyfin.Plugin.ImprovedSyncPlay
 
-Minimal Jellyfin server plugin scaffold. Rename placeholders before shipping (see [AGENTS.md](AGENTS.md#fork-rename-checklist)).
+Jellyfin server plugin that adds a SyncPlay session share button to the web UI (via optional File Transformation integration).
 
 ## Build
 
@@ -8,15 +8,6 @@ Minimal Jellyfin server plugin scaffold. Rename placeholders before shipping (se
 dotnet build -c Release
 dotnet test -c Release
 ```
-
-## Rename before shipping
-
-1. Project folder and `.csproj` / solution: `Jellyfin.Plugin.Template` → `Jellyfin.Plugin.YourName`
-2. Namespaces in all `.cs` files
-3. `Plugin.cs`: `Name` and new `Id` GUID
-4. `meta.json`, root `build.yaml`, `versions.props` (SDK / ABI aligned to your Jellyfin server)
-
-Full checklist: [AGENTS.md](AGENTS.md#fork-rename-checklist).
 
 ## Local test server
 
@@ -38,7 +29,6 @@ CI equivalent: `cd tests/integration && ./smoke.sh`. Server/SDK matrix: [docs/CO
 | [CONTEXT.md](CONTEXT.md) | Glossary |
 | [docs/LOGGING.md](docs/LOGGING.md) | Logging and optional-plugin patterns |
 | [docs/catalog/](docs/catalog/) | Ecosystem integration guides |
-| [docs/archetypes/](docs/archetypes/) | Optional patterns (config page, webhook, metadata) |
 
 Agents: start at [AGENTS.md](AGENTS.md). Devcontainer: `.devcontainer/devcontainer.json`.
 

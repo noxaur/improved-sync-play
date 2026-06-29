@@ -1,7 +1,7 @@
 using System;
 using MediaBrowser.Common.Plugins;
 
-namespace Jellyfin.Plugin.Template.Infrastructure;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Infrastructure;
 
 /// <summary>
 /// Detects co-installed plugins without assuming they are present.

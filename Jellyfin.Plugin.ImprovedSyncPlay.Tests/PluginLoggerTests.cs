@@ -1,7 +1,7 @@
-using Jellyfin.Plugin.Template.Infrastructure;
+using Jellyfin.Plugin.ImprovedSyncPlay.Infrastructure;
 using Microsoft.Extensions.Logging;
 
-namespace Jellyfin.Plugin.Template.Tests;
+namespace Jellyfin.Plugin.ImprovedSyncPlay.Tests;
 
 public class PluginLoggerTests
 {

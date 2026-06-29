@@ -6,7 +6,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 COMPOSE="$ROOT/tests/integration/docker-compose.yml"
 PLUGIN_NAME="$(
-  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.Template/meta.json'))['name'])"
+  python3 -c "import json; print(json.load(open('$ROOT/Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['name'])"
 )"
 
 export JELLYFIN_CONFIG="${JELLYFIN_CONFIG:-$ROOT/.jellyfin/config}"

@@ -37,7 +37,7 @@ jobs:
 
       - name: Package zip
         run: |
-          PLUGIN_NAME="$(python3 -c "import json; print(json.load(open('Jellyfin.Plugin.Template/meta.json'))['name'])")"
+          PLUGIN_NAME="$(python3 -c "import json; print(json.load(open('Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['name'])")"
           cd "artifacts/plugin/$PLUGIN_NAME"
           zip -r "../../../${PLUGIN_NAME}-${GITHUB_REF_NAME}.zip" .
 
