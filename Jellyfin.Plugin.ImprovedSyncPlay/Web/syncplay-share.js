@@ -4,62 +4,37 @@
     var SHARE_ITEM_ID = 'improved-syncplay-share';
 
     function getApiClient() {
-        return window.ApiClient;
+        if (window.ApiClient) {
+            return window.ApiClient;
+        }
+
+        if (window.connectionManager && typeof window.connectionManager.currentApiClient === 'function') {
+            return window.connectionManager.currentApiClient();
+        }
+
+        return null;
     }
 
     function getSyncPlayManager() {
-        return window.SyncPlay && window.SyncPlay.Manager && window.SyncPlay.Manager.getInstance
-            ? window.SyncPlay.Manager.getInstance()
-            : null;
+        return window.SyncPlay && window.SyncPlay.Manager ? window.SyncPlay.Manager : null;
     }
 
     function getGroupIdFromManager() {
         var manager = getSyncPlayManager();
-        if (!manager) {
+        if (!manager || typeof manager.getGroupInfo !== 'function') {
             return null;
         }
 
-        if (typeof manager.getCurrentGroupId === 'function') {
-            return manager.getCurrentGroupId();
-        }
-
-        return manager.currentGroupId || manager.groupId || null;
-    }
-
-    function listSyncPlayGroups() {
-        var api = getApiClient();
-        if (!api) {
-            return Promise.resolve([]);
-        }
-
-        return api.ajax({
-            type: 'GET',
-            url: api.getUrl('SyncPlay/List')
-        }).then(function (groups) {
-            return groups || [];
-        }).catch(function (error) {
-            console.warn('[ImprovedSyncPlay] Failed to list SyncPlay groups', error);
-            return [];
-        });
+        var info = manager.getGroupInfo();
+        return info && (info.GroupId || info.groupId) || null;
     }
 
     function getActiveGroupId() {
-        var managerGroupId = getGroupIdFromManager();
-        if (managerGroupId) {
-            return Promise.resolve(managerGroupId);
-        }
-
-        return listSyncPlayGroups().then(function (groups) {
-            var active = groups.find(function (group) {
-                return group.IsActive || (group.Participants && group.Participants.length > 0);
-            });
-
-            return (active && active.GroupId) || (groups[0] && groups[0].GroupId) || null;
-        });
+        return Promise.resolve(getGroupIdFromManager() || null);
     }
 
     function buildShareUrl(groupId) {
-        return window.location.origin + window.location.pathname + '?syncplayGroup=' + encodeURIComponent(groupId);
+        return window.location.origin + '/web/?syncplayGroup=' + encodeURIComponent(groupId);
     }
 
     function copyShareUrl(url) {
@@ -78,11 +53,12 @@
     }
 
     function createShareMenuItem() {
-        var item = document.createElement('button');
+        var item = document.createElement('li');
         item.id = SHARE_ITEM_ID;
-        item.type = 'button';
-        item.className = 'menuOption btnShareSyncPlay';
-        item.innerHTML = '<span class="material-icons share" aria-hidden="true"></span><span>Share</span>';
+        item.setAttribute('role', 'menuitem');
+        item.className = 'MuiMenuItem-root MuiMenuItem-gutters btnShareSyncPlay';
+        item.tabIndex = -1;
+        item.textContent = 'Share';
         item.addEventListener('click', function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -100,19 +76,35 @@
         return item;
     }
 
-    function injectShareMenuItem(menu) {
-        if (!menu || document.getElementById(SHARE_ITEM_ID) || !isActiveSyncPlaySession()) {
+    function injectShareMenuItem(menuList) {
+        if (!menuList || document.getElementById(SHARE_ITEM_ID) || !isActiveSyncPlaySession()) {
             return;
         }
 
-        menu.appendChild(createShareMenuItem());
+        menuList.appendChild(createShareMenuItem());
     }
 
     function tryInjectShareMenu() {
-        var menu = document.querySelector('#app-sync-play-menu');
-        if (menu) {
-            injectShareMenuItem(menu);
+        var menuList = document.querySelector('#app-sync-play-menu [role="menu"]');
+        if (menuList) {
+            injectShareMenuItem(menuList);
         }
+    }
+
+    function whenApiClientReady(callback, attemptsLeft) {
+        var api = getApiClient();
+        if (api) {
+            callback(api);
+            return;
+        }
+
+        if (attemptsLeft <= 0) {
+            return;
+        }
+
+        window.setTimeout(function () {
+            whenApiClientReady(callback, attemptsLeft - 1);
+        }, 250);
     }
 
     function joinFromQueryParam() {
@@ -122,24 +114,28 @@
             return;
         }
 
-        var api = getApiClient();
-        if (!api) {
-            return;
-        }
+        whenApiClientReady(function (api) {
+            var joinPromise;
+            if (typeof api.joinSyncPlayGroup === 'function') {
+                joinPromise = api.joinSyncPlayGroup({ GroupId: groupId });
+            } else {
+                joinPromise = api.ajax({
+                    type: 'POST',
+                    url: api.getUrl('SyncPlay/Join'),
+                    data: JSON.stringify({ GroupId: groupId }),
+                    contentType: 'application/json'
+                });
+            }
 
-        api.ajax({
-            type: 'POST',
-            url: api.getUrl('SyncPlay/Join'),
-            data: JSON.stringify({ GroupId: groupId }),
-            contentType: 'application/json'
-        }).then(function () {
-            params.delete('syncplayGroup');
-            var query = params.toString();
-            var cleanUrl = window.location.pathname + (query ? '?' + query : '') + window.location.hash;
-            window.history.replaceState({}, '', cleanUrl);
-        }).catch(function (error) {
-            console.warn('[ImprovedSyncPlay] Failed to join SyncPlay group from link', error);
-        });
+            joinPromise.then(function () {
+                params.delete('syncplayGroup');
+                var query = params.toString();
+                var cleanUrl = window.location.pathname + (query ? '?' + query : '') + window.location.hash;
+                window.history.replaceState({}, '', cleanUrl);
+            }).catch(function (error) {
+                console.warn('[ImprovedSyncPlay] Failed to join SyncPlay group from link', error);
+            });
+        }, 40);
     }
 
     function observeSyncPlayMenus() {

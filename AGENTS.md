@@ -41,10 +41,10 @@ Requires Docker Compose v2. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) f
 
 Complete before shipping. Replace every `Template` placeholder.
 
-1. **Project identity** — rename folder, `.csproj`, `.sln`, and test project: `Jellyfin.Plugin.ImprovedSyncPlay` → `Jellyfin.Plugin.<YourName>`
+1. **Project identity** — rename folder, `.csproj`, `.sln`, and test project: `Jellyfin.Plugin.Template` → `Jellyfin.Plugin.<YourName>`
 2. **Namespaces** — update `namespace` / `using` in all `.cs` files
-3. **[Plugin.cs](Jellyfin.Plugin.ImprovedSyncPlay/Plugin.cs)** — set `Name`; generate a new `Id` GUID (do not keep `a3f8c2e1-4b5d-6e7f-8a9b-0c1d2e3f4a5b`)
-4. **[meta.json](Jellyfin.Plugin.ImprovedSyncPlay/meta.json)** — `name`, `guid`, `version`, `description`, `overview`, `owner`, `targetAbi`
+3. **[Plugin.cs](Jellyfin.Plugin.Template/Plugin.cs)** — set `Name`; generate a new `Id` GUID (do not keep `eb5d7894-8eef-4b36-aa6f-5d124e828ce1`)
+4. **[meta.json](Jellyfin.Plugin.Template/meta.json)** — `name`, `guid`, `version`, `description`, `overview`, `owner`, `targetAbi`
 5. **[build.yaml](build.yaml)** — `name`, `guid`, `version`, `artifacts` (DLL filename), descriptions, `owner`, `category`
 6. **[versions.props](versions.props)** — `JellyfinSdkVersion` and `JellyfinTargetAbi` aligned with your target Jellyfin server
 

@@ -8,6 +8,7 @@ namespace Jellyfin.Plugin.ImprovedSyncPlay.Tests;
 
 public class OptionalPluginGuardTests
 {
+    private const string PluginName = "Improved SyncPlay";
     private static readonly Guid PluginId = Guid.Parse("22222222-2222-2222-2222-222222222222");
 
     [Fact]
@@ -58,7 +59,7 @@ public class OptionalPluginGuardTests
         pluginManager.Setup(m => m.GetPlugin(PluginId, null)).Returns((LocalPlugin?)null);
 
         var logger = new ListLogger();
-        var guard = new OptionalPluginGuard(pluginManager.Object, new PluginLogger(logger, "Template"));
+        var guard = new OptionalPluginGuard(pluginManager.Object, new PluginLogger(logger, PluginName));
 
         var exception = Assert.Throws<RequiredPluginMissingException>(
             () => guard.RequirePlugin(PluginId, "import library"));
@@ -74,7 +75,7 @@ public class OptionalPluginGuardTests
     private static OptionalPluginGuard CreateGuard(IPluginManager pluginManager)
     {
         var logger = new ListLogger();
-        return new OptionalPluginGuard(pluginManager, new PluginLogger(logger, "Template"));
+        return new OptionalPluginGuard(pluginManager, new PluginLogger(logger, PluginName));
     }
 
     private static LocalPlugin CreateLocalPlugin(bool isSupported, PluginStatus status)

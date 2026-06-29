@@ -5,6 +5,8 @@ namespace Jellyfin.Plugin.ImprovedSyncPlay.Tests;
 
 public class PluginLoggerTests
 {
+    private const string PluginName = "Improved SyncPlay";
+
     [Theory]
     [InlineData(nameof(PluginLogger.Verbose), LogLevel.Trace)]
     [InlineData(nameof(PluginLogger.Debug), LogLevel.Debug)]
@@ -14,13 +16,13 @@ public class PluginLoggerTests
     public void TierMethods_EmitExpectedLogLevel(string methodName, LogLevel expectedLevel)
     {
         var logger = new ListLogger();
-        var pluginLogger = new PluginLogger(logger, "Template");
+        var pluginLogger = new PluginLogger(logger, PluginName);
 
         Invoke(pluginLogger, methodName, "hello");
 
         var entry = Assert.Single(logger.Entries);
         Assert.Equal(expectedLevel, entry.Level);
-        Assert.Contains("[Template]", entry.Message, StringComparison.Ordinal);
+        Assert.Contains("[Improved SyncPlay]", entry.Message, StringComparison.Ordinal);
         Assert.Contains("hello", entry.Message, StringComparison.Ordinal);
     }
 
@@ -28,7 +30,7 @@ public class PluginLoggerTests
     public void LogOptionalPluginMissing_EmitsWarningWithContext()
     {
         var logger = new ListLogger();
-        var pluginLogger = new PluginLogger(logger, "Template");
+        var pluginLogger = new PluginLogger(logger, PluginName);
         var pluginId = Guid.Parse("11111111-1111-1111-1111-111111111111");
 
         pluginLogger.LogOptionalPluginMissing(pluginId, "sync metadata", "Feature disabled.");
