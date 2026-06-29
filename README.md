@@ -29,6 +29,7 @@ CI equivalent: `cd tests/integration && ./smoke.sh`. Server/SDK matrix: [docs/CO
 | [CONTEXT.md](CONTEXT.md) | Glossary |
 | [docs/LOGGING.md](docs/LOGGING.md) | Logging and optional-plugin patterns |
 | [docs/catalog/](docs/catalog/) | Ecosystem integration guides |
+| [docs/template-feedback.md](docs/template-feedback.md) | Template bootstrap friction notes |
 
 Agents: start at [AGENTS.md](AGENTS.md). Devcontainer: `.devcontainer/devcontainer.json`.
 
