@@ -81,4 +81,8 @@ Open devcontainer: VS Code / Cursor → **Reopen in Container** (requires `.devc
 
 Workflow [`.github/workflows/release.yml`](../../.github/workflows/release.yml) runs Docker smoke, then uploads a plugin zip to GitHub Releases.
 
-Manual Jellyfin manifest publish (v1): build zip from `artifacts/plugin/<Name>/`, upload to your plugin repository URL in Jellyfin Dashboard → Plugins → Repositories. No automated manifest CD in v1.
+Manual Jellyfin manifest publish (v1): after tagging, run `./scripts/update-manifest.sh Improved-SyncPlay-<version>.zip v<version>`, commit `manifest.json`, and push. The release workflow also uploads `manifest.json` and the zip to GitHub Releases. Users add this repository URL in Jellyfin:
+
+```
+https://raw.githubusercontent.com/noxaur/improved-sync-play/master/manifest.json
+```

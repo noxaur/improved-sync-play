@@ -8,7 +8,7 @@ overview: "SyncPlay session invite link sharing for Jellyfin web"
 description: >
   Adds a SyncPlay session share button to the Jellyfin web UI when File Transformation is installed.
 category: "General"
-owner: "orchestrator"
+owner: "noxaur"
 artifacts:
 - "Jellyfin.Plugin.ImprovedSyncPlay.dll"
 changelog: >

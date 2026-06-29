@@ -2,6 +2,19 @@
 
 Jellyfin server plugin that adds a SyncPlay session share button to the web UI (via optional File Transformation integration).
 
+## Install from Jellyfin
+
+1. **Dashboard → Plugins → Repositories → +**
+2. Add repository URL:
+
+   ```
+   https://raw.githubusercontent.com/noxaur/improved-sync-play/master/manifest.json
+   ```
+
+3. **Dashboard → Plugins → Catalog** — find **Improved SyncPlay** and install.
+
+Requires Jellyfin **10.11+** and the optional [File Transformation](https://github.com/IAmParadox27/jellyfin-plugin-file-transformation) plugin for the share button UI.
+
 ## Build
 
 ```bash

@@ -5,7 +5,7 @@
   "guid": "a3f8c2e1-4b5d-6e7f-8a9b-0c1d2e3f4a5b",
   "name": "Improved SyncPlay",
   "overview": "SyncPlay session invite link sharing for Jellyfin web",
-  "owner": "orchestrator",
+  "owner": "noxaur",
   "targetAbi": "10.11.0.0",
   "version": "1.0.0.0"
 }

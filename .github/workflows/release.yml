@@ -37,13 +37,19 @@ jobs:
 
       - name: Package zip
         run: |
+          VERSION="$(python3 -c "import json; print(json.load(open('Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['version'])")"
           PLUGIN_NAME="$(python3 -c "import json; print(json.load(open('Jellyfin.Plugin.ImprovedSyncPlay/meta.json'))['name'])")"
           cd "artifacts/plugin/$PLUGIN_NAME"
-          zip -r "../../../${PLUGIN_NAME}-${GITHUB_REF_NAME}.zip" .
+          ZIP_NAME="Improved-SyncPlay-${VERSION}.zip"
+          zip -r "../../../${ZIP_NAME}" .
+          cd ../../..
+          ./scripts/update-manifest.sh "${ZIP_NAME}" "${GITHUB_REF_NAME}"
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v2
         with:
-          files: "*.zip"
+          files: |
+            Improved-SyncPlay-*.zip
+            manifest.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
