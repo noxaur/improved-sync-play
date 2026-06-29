@@ -1,0 +1,9 @@
+version: 1
+entries:
+  - slug: missing-name
+    category: pattern
+    doc_path: docs/catalog/catalog-stub.md
+    entry_type: pattern
+    integration_tier: pattern
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"

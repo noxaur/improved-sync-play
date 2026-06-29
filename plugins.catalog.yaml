@@ -1,0 +1,71 @@
+version: 1
+entries:
+  - name: Catalog system stub
+    slug: catalog-stub
+    category: pattern
+    doc_path: docs/catalog/catalog-stub.md
+    entry_type: pattern
+    integration_tier: pattern
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+
+  - name: File Transformation
+    slug: file-transformation
+    category: ui-extension
+    doc_path: docs/catalog/file-transformation.md
+    entry_type: plugin
+    integration_tier: soft_runtime
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+    repo_url: https://github.com/IAmParadox27/jellyfin-plugin-file-transformation
+    optional_tool_path: tools/catalog/file-transformation/verify.sh
+
+  - name: Home Screen Sections
+    slug: home-sections
+    category: ui-extension
+    doc_path: docs/catalog/home-sections.md
+    entry_type: plugin
+    integration_tier: soft_runtime
+    runtime_required: false
+    jellyfin_min_version: "10.10.7"
+    repo_url: https://github.com/IAmParadox27/jellyfin-plugin-home-sections
+
+  - name: Jellyfin.Plugin.Referenceable
+    slug: plugin-referenceable
+    category: cross-plugin
+    doc_path: docs/catalog/plugin-referenceable.md
+    entry_type: plugin
+    integration_tier: referenceable
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+    repo_url: https://github.com/IAmParadox27/jellyfin-plugin-referenceable
+
+  - name: JellyfinLoader
+    slug: jellyfin-loader
+    category: cross-plugin
+    doc_path: docs/catalog/jellyfin-loader.md
+    entry_type: plugin
+    integration_tier: loader
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+    repo_url: https://github.com/stenlan/JellyfinLoader
+
+  - name: TMDb metadata
+    slug: tmdb
+    category: metadata
+    doc_path: docs/catalog/tmdb.md
+    entry_type: plugin
+    integration_tier: soft_runtime
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+    repo_url: https://github.com/jellyfin/jellyfin
+
+  - name: Intro Skipper
+    slug: intro-skipper
+    category: community
+    doc_path: docs/catalog/intro-skipper.md
+    entry_type: plugin
+    integration_tier: soft_runtime
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"
+    repo_url: https://github.com/intro-skipper/intro-skipper

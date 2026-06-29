@@ -1,0 +1,10 @@
+version: 1
+entries:
+  - name: Plugin without repo
+    slug: plugin-no-repo
+    category: metadata
+    doc_path: docs/catalog/catalog-stub.md
+    entry_type: plugin
+    integration_tier: soft_runtime
+    runtime_required: false
+    jellyfin_min_version: "10.9.0"

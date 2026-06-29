@@ -1,0 +1,15 @@
+---
+name: "Template"
+guid: "eb5d7894-8eef-4b36-aa6f-5d124e828ce1"
+version: "1.0.0.0"
+targetAbi: "10.11.0.0"
+framework: "net9.0"
+overview: "Short description about your plugin"
+description: >
+  Replace with a longer description of your plugin.
+category: "General"
+owner: "your-github-username"
+artifacts:
+- "Jellyfin.Plugin.Template.dll"
+changelog: >
+  Initial template release

@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <JellyfinSdkVersion>10.11.11</JellyfinSdkVersion>
+    <JellyfinTargetAbi>10.11.0.0</JellyfinTargetAbi>
+  </PropertyGroup>
+</Project>

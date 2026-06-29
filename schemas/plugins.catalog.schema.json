@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/noxaur/jellyfin-plugin-template/schemas/plugins.catalog.schema.json",
+  "title": "Jellyfin ecosystem plugin catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "entries"],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "const": 1
+    },
+    "entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "slug",
+        "category",
+        "doc_path",
+        "runtime_required",
+        "jellyfin_min_version",
+        "entry_type",
+        "integration_tier"
+      ],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "slug": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "category": { "type": "string", "minLength": 1 },
+        "doc_path": { "type": "string", "minLength": 1 },
+        "runtime_required": { "type": "boolean" },
+        "jellyfin_min_version": { "type": "string", "minLength": 1 },
+        "entry_type": {
+          "type": "string",
+          "enum": ["plugin", "pattern"]
+        },
+        "integration_tier": {
+          "type": "string",
+          "enum": ["soft_runtime", "referenceable", "loader", "pattern"]
+        },
+        "repo_url": { "type": "string", "minLength": 1 },
+        "optional_tool_path": { "type": "string", "minLength": 1 },
+        "last_verified": { "type": "string", "minLength": 1 },
+        "verified_against_jellyfin": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "entry_type": { "const": "plugin" } },
+            "required": ["entry_type"]
+          },
+          "then": { "required": ["repo_url"] }
+        }
+      ]
+    }
+  }
+}
